@@ -1,7 +1,7 @@
+drop database if exists dbcourse;
 -- 实验一：SQL 定义功能、数据插入 1 学时
 -- 创建学生数据库
-create database dbcourse;
-
+create database dbcourse character set utf8 collate utf8_general_ci;
 -- 建表
 -- S 学生
 create table S (
@@ -38,13 +38,13 @@ insert into S values ('201215122', '刘晨', '女', 19, 'CS');
 insert into S values ('201215123', '王敏', '女', 18, 'MA');
 insert into S values ('201215125', '张立', '男', 20, 'IS');
 -- C
-insert into C values ('1', '数据库', '5', 4);
 insert into C values ('2', '数学', null, 2);
-insert into C values ('3', '信息系统', '1', 4);
-insert into C values ('4', '操作系统', '6', 3);
-insert into C values ('5', '数据结构', '7', 4);
 insert into C values ('6', '数据处理', null, 2);
 insert into C values ('7', 'PASCAL语言', '6', 4);
+insert into C values ('4', '操作系统', '6', 3);
+insert into C values ('5', '数据结构', '7', 4);
+insert into C values ('1', '数据库', '5', 4);
+insert into C values ('3', '信息系统', '1', 4);
 -- SC
 insert into SC values ('201215121', '1', 92);
 insert into SC values ('201215121', '2', 85);
