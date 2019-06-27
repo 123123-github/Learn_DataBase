@@ -1,0 +1,286 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="dbbookModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Book">
+          <Key>
+            <PropertyRef Name="isbn" />
+          </Key>
+          <Property Name="isbn" Type="bigint" Nullable="false" />
+          <Property Name="title" Type="varchar" MaxLength="120" />
+          <Property Name="authors" Type="varchar" MaxLength="120" />
+          <Property Name="press" Type="varchar" MaxLength="60" />
+          <Property Name="pdate" Type="date" />
+          <Property Name="page" Type="int" />
+          <Property Name="price" Type="float" />
+        </EntityType>
+        <EntityType Name="BookInfo">
+          <Key>
+            <PropertyRef Name="isbn" />
+          </Key>
+          <Property Name="isbn" Type="bigint" Nullable="false" />
+          <Property Name="author_info" Type="varchar" MaxLength="2000" />
+          <Property Name="content_info" Type="varchar" MaxLength="2000" />
+        </EntityType>
+        <EntityType Name="Comment">
+          <Key>
+            <PropertyRef Name="cid" />
+          </Key>
+          <Property Name="cid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="isbn" Type="bigint" Nullable="false" />
+          <Property Name="uid" Type="int" Nullable="false" />
+          <Property Name="cdate" Type="date" />
+          <Property Name="score" Type="tinyint" />
+          <Property Name="content" Type="varchar" MaxLength="1000" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="uid" />
+          </Key>
+          <Property Name="uid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="account" Type="varchar" MaxLength="20" />
+          <Property Name="password" Type="varchar" MaxLength="12" />
+          <Property Name="name" Type="varchar" MaxLength="50" />
+          <Property Name="place" Type="varchar" MaxLength="50" />
+          <Property Name="udate" Type="date" />
+        </EntityType>
+        <Association Name="FK__BookInfo__isbn__22751F6C">
+          <End Role="Book" Type="Self.Book" Multiplicity="1" />
+          <End Role="BookInfo" Type="Self.BookInfo" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Book">
+              <PropertyRef Name="isbn" />
+            </Principal>
+            <Dependent Role="BookInfo">
+              <PropertyRef Name="isbn" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Comment__content__25518C17">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="uid" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="uid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Comment__isbn__2645B050">
+          <End Role="Book" Type="Self.Book" Multiplicity="1" />
+          <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Book">
+              <PropertyRef Name="isbn" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="isbn" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dbbookModelStoreContainer">
+          <EntitySet Name="Book" EntityType="Self.Book" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BookInfo" EntityType="Self.BookInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Comment" EntityType="Self.Comment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__BookInfo__isbn__22751F6C" Association="Self.FK__BookInfo__isbn__22751F6C">
+            <End Role="Book" EntitySet="Book" />
+            <End Role="BookInfo" EntitySet="BookInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Comment__content__25518C17" Association="Self.FK__Comment__content__25518C17">
+            <End Role="User" EntitySet="User" />
+            <End Role="Comment" EntitySet="Comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Comment__isbn__2645B050" Association="Self.FK__Comment__isbn__2645B050">
+            <End Role="Book" EntitySet="Book" />
+            <End Role="Comment" EntitySet="Comment" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="dbbookModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Book">
+          <Key>
+            <PropertyRef Name="isbn" />
+          </Key>
+          <Property Name="isbn" Type="Int64" Nullable="false" />
+          <Property Name="title" Type="String" MaxLength="120" FixedLength="false" Unicode="false" />
+          <Property Name="authors" Type="String" MaxLength="120" FixedLength="false" Unicode="false" />
+          <Property Name="press" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="pdate" Type="DateTime" Precision="0" />
+          <Property Name="page" Type="Int32" />
+          <Property Name="price" Type="Double" />
+          <NavigationProperty Name="BookInfo" Relationship="Self.FK__BookInfo__isbn__22751F6C" FromRole="Book" ToRole="BookInfo" />
+          <NavigationProperty Name="Comment" Relationship="Self.FK__Comment__isbn__2645B050" FromRole="Book" ToRole="Comment" />
+        </EntityType>
+        <EntityType Name="BookInfo">
+          <Key>
+            <PropertyRef Name="isbn" />
+          </Key>
+          <Property Name="isbn" Type="Int64" Nullable="false" />
+          <Property Name="author_info" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+          <Property Name="content_info" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Book" Relationship="Self.FK__BookInfo__isbn__22751F6C" FromRole="BookInfo" ToRole="Book" />
+        </EntityType>
+        <EntityType Name="Comment">
+          <Key>
+            <PropertyRef Name="cid" />
+          </Key>
+          <Property Name="cid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="isbn" Type="Int64" Nullable="false" />
+          <Property Name="uid" Type="Int32" Nullable="false" />
+          <Property Name="cdate" Type="DateTime" Precision="0" />
+          <Property Name="score" Type="Byte" />
+          <Property Name="content" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Book" Relationship="Self.FK__Comment__isbn__2645B050" FromRole="Comment" ToRole="Book" />
+          <NavigationProperty Name="User" Relationship="Self.FK__Comment__content__25518C17" FromRole="Comment" ToRole="User" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="uid" />
+          </Key>
+          <Property Name="uid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="account" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="place" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="udate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Comment" Relationship="Self.FK__Comment__content__25518C17" FromRole="User" ToRole="Comment" />
+        </EntityType>
+        <Association Name="FK__BookInfo__isbn__22751F6C">
+          <End Role="Book" Type="Self.Book" Multiplicity="1" />
+          <End Role="BookInfo" Type="Self.BookInfo" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Book">
+              <PropertyRef Name="isbn" />
+            </Principal>
+            <Dependent Role="BookInfo">
+              <PropertyRef Name="isbn" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Comment__isbn__2645B050">
+          <End Role="Book" Type="Self.Book" Multiplicity="1" />
+          <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Book">
+              <PropertyRef Name="isbn" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="isbn" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Comment__content__25518C17">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="uid" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="uid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dbbookEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Book" EntityType="Self.Book" />
+          <EntitySet Name="BookInfo" EntityType="Self.BookInfo" />
+          <EntitySet Name="Comment" EntityType="Self.Comment" />
+          <EntitySet Name="User" EntityType="Self.User" />
+          <AssociationSet Name="FK__BookInfo__isbn__22751F6C" Association="Self.FK__BookInfo__isbn__22751F6C">
+            <End Role="Book" EntitySet="Book" />
+            <End Role="BookInfo" EntitySet="BookInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Comment__isbn__2645B050" Association="Self.FK__Comment__isbn__2645B050">
+            <End Role="Book" EntitySet="Book" />
+            <End Role="Comment" EntitySet="Comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Comment__content__25518C17" Association="Self.FK__Comment__content__25518C17">
+            <End Role="User" EntitySet="User" />
+            <End Role="Comment" EntitySet="Comment" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="dbbookModelStoreContainer" CdmEntityContainer="dbbookEntities">
+          <EntitySetMapping Name="Book">
+            <EntityTypeMapping TypeName="dbbookModel.Book">
+              <MappingFragment StoreEntitySet="Book">
+                <ScalarProperty Name="isbn" ColumnName="isbn" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="authors" ColumnName="authors" />
+                <ScalarProperty Name="press" ColumnName="press" />
+                <ScalarProperty Name="pdate" ColumnName="pdate" />
+                <ScalarProperty Name="page" ColumnName="page" />
+                <ScalarProperty Name="price" ColumnName="price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BookInfo">
+            <EntityTypeMapping TypeName="dbbookModel.BookInfo">
+              <MappingFragment StoreEntitySet="BookInfo">
+                <ScalarProperty Name="isbn" ColumnName="isbn" />
+                <ScalarProperty Name="author_info" ColumnName="author_info" />
+                <ScalarProperty Name="content_info" ColumnName="content_info" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Comment">
+            <EntityTypeMapping TypeName="dbbookModel.Comment">
+              <MappingFragment StoreEntitySet="Comment">
+                <ScalarProperty Name="cid" ColumnName="cid" />
+                <ScalarProperty Name="isbn" ColumnName="isbn" />
+                <ScalarProperty Name="uid" ColumnName="uid" />
+                <ScalarProperty Name="cdate" ColumnName="cdate" />
+                <ScalarProperty Name="score" ColumnName="score" />
+                <ScalarProperty Name="content" ColumnName="content" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="dbbookModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="uid" ColumnName="uid" />
+                <ScalarProperty Name="account" ColumnName="account" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="place" ColumnName="place" />
+                <ScalarProperty Name="udate" ColumnName="udate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

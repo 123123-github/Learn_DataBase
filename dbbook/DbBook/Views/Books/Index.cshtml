@@ -1,0 +1,81 @@
+﻿@model IEnumerable<DbBook.Models.Book>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@Html.Partial("/Views/Items/SearchBar.cshtml", (SearchBar)ViewBag.SearchBar)
+
+<br>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.isbn)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.authors)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.press)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.pdate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.page)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.price)
+        </th>
+        <th>
+            @Html.ActionLink("Create New", "Create")
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.isbn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.authors)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.press)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.pdate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.page)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.price)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.isbn }) |
+                @Html.ActionLink("Details", "Details", new { id = item.isbn }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.isbn })
+            </td>
+        </tr>
+    }
+
+</table>
+
+@{
+    string tag = Request.Params.Get("tag");
+    string content = Request.Params.Get("content");
+    string sort = Request.Params.Get("sort");
+}
+<div>
+    @Html.PageLinks((PagingInfo)ViewBag.PagingInfo, x => Url.Action("Index", "Books",
+        new { tag = tag, content = content, sort = sort, page = x }))
+</div>
+

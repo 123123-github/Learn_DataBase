@@ -1,0 +1,58 @@
+﻿@model DbBook.Models.User
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>User</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.account)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.account)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.password)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.password)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.place)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.place)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.udate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.udate)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.uid }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

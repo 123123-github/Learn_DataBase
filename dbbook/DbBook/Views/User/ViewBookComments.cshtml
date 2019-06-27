@@ -1,0 +1,11 @@
+﻿@using DbBook.ViewModels;
+@model List<CommentItem>
+
+<div class="container clearfix">
+    <h2 class="font-weight-bold">@ViewBag.BookTitle 的短评</h2>
+    <span class="font-weight-light"> 全部共 @ViewBag.CommentsNum 条 </span>
+    @foreach (var comment in Model)
+    {
+        @Html.Partial("~/Views/Items/CommentItem.cshtml", comment);
+    }
+</div>

@@ -1,0 +1,19 @@
+﻿@using DbBook.ViewModels;
+@model CommentItem
+
+@{
+    string user_pic_url = "/Images/user/user_" + Model.account + ".jpg";
+    string user_link_url = "/User/ViewUser?uid=" + Model.uid;
+}
+
+<div class="media border my-2 p-3">
+    <div class="media-body">
+        <a href="@user_link_url">
+            <img src="@user_pic_url" class="float-left mr-2" style="width:24px;">
+        </a>
+        <span class="mr-2">@Model.name</span>
+        <span class="star_show mr-2" data-score="@Model.score"></span>
+        <span class="">@Model.cdate.ToString()</span>
+        <p class="mt-1">@Model.content</p>
+    </div>
+</div>

@@ -1,0 +1,58 @@
+﻿@model DbBook.Models.Comment
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Comment</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.cdate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cdate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.score)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.score)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.content)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.content)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Book.title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Book.title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User.account)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.account)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.cid }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

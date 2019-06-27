@@ -1,0 +1,18 @@
+﻿@model DbBook.ViewModels.SearchBar
+
+@using (Html.BeginForm(Model.actionName, Model.controllerName, FormMethod.Get))
+{
+    <div class="container">
+        <div class="row">
+            @Html.DropDownList("tag", new SelectList(Model.tagList), htmlAttributes: new { @class = "form-control col-1 mr-3" })
+            <input name="content" type="text" class="form-control col-5 mr-3" placeholder="搜索 . . ." />
+            @Html.DropDownList("sort", new SelectList(Model.sortList), htmlAttributes: new { @class = "form-control col-1 mr-3" })
+            <button class="btn btn-link mr-5" type="submit"><i class="fa fa-search fa-lg"></i></button>
+            <div class="btn-group">
+                <button type="button" class="btn btn-primary">评论最多</button>
+                <button type="button" class="btn btn-primary">评分最高</button>
+                <button type="button" class="btn btn-primary">页数最多</button>
+            </div>
+        </div>
+    </div>
+}

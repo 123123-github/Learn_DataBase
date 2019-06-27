@@ -1,0 +1,18 @@
+﻿@using DbBook.ViewModels;
+@model BookItem
+
+@{
+    string book_cover = "/Images/cover/book_" + Model.isbn.ToString() + ".jpg";
+}
+
+<div class="col-md-3 my-2">
+    <div class="cover">
+        <a href="~/User/ViewBook?isbn=@Model.isbn">
+            <img src="@book_cover" onerror="this.src='../../Images/cover/book_default.jpg'" class="rounded" title="查看详情" alt="@Model.title" style="width:134px;height:200px;">
+        </a>
+    </div>
+    <div class="info my-1">
+        <span class="font-weight-bold">@Model.title</span><br>
+        <span class="font-weight-light">@Model.authors</span>
+    </div>
+</div>

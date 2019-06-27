@@ -1,0 +1,18 @@
+﻿@using DbBook.ViewModels;
+@model UserItem
+
+@{
+    string pic_url = "/Images/user/user_" + Model.account + ".jpg";
+}
+
+<div class="col-md-2 my-2">
+    <div class="card" style="width:150px;">
+        <a href="~/User/ViewUser?uid=@Model.uid">
+            <img class="card-img-top" onerror="this.src='../../Images/user/user_default.jpg'" src="@pic_url" alt="@Model.name" style="width:100%;height:150px">
+        </a>
+        <div class="card-body">
+            <span class="font-weight-bold">@Model.name</span><br>
+            <span class="card-text">@Model.place</span>
+        </div>
+    </div>
+</div>

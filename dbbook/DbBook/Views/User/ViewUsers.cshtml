@@ -1,0 +1,10 @@
+﻿@using DbBook.ViewModels;
+@model List<UserItem>
+
+<br>
+<div class="row">
+    @foreach (var user in Model)
+    {
+        @Html.Partial("~/Views/Items/UserItem.cshtml", user);
+    }
+</div>

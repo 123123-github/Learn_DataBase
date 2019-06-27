@@ -1,0 +1,53 @@
+﻿@using DbBook.ViewModels;
+@model UserDetailItem
+
+@{
+    string user_face = "/Images/user/user_" + Model.account + ".jpg";
+}
+
+<br>
+<div class="container clearfix" id="basic_info">
+    <h3 class="font-weight-bold mb-3">@Model.name</h3>
+    <div id="cover" class="float-left mr-3">
+        <a href="@user_face" title="@Model.name">
+            <img src="@user_face" class="rounded" title="点击看大图" alt="@Model.name" style="width:135px;max-height:200px;">
+        </a>
+        <br>
+    </div>
+    <div id="info" class="float-left" style="font-size:18px">
+        <span class="font-weight-light">昵称:</span> @Model.name<br>
+        <span class="font-weight-light">常居:</span> @Model.place<br>
+        <span class="font-weight-light">帐号:</span> @Model.account<br><br>
+        @Model.udate.ToString().Split()[0] <span class="font-weight-light">加入</span>
+    </div>
+</div>
+
+@{
+    string comment_url = "/User/ViewUserComments?uid=" + Model.uid.ToString();
+}
+<br>
+<div class="container" id="comments">
+    <h5>
+        <span class="text-info">短评&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·</span>
+        <span class="font-weight-light" style="font-size:16px">
+            <a href="@comment_url">(全部 @ViewBag.CommentsNum 条)</a>
+        </span>
+    </h5>
+    <div class="row">
+        @foreach (var cmt in (List<CommentItem>)ViewBag.PartComments)
+        {
+            string book_cover = "/Images/cover/book_" + cmt.isbn + ".jpg";
+            string book_url = "/User/ViewBook?isbn=" + cmt.isbn;
+
+            <div class="col-1 my-2">
+                <a href="@book_url" title="查看详情">
+                    <img src="@book_cover" title="查看详情" class="rounded" alt="@cmt.isbn" style="width:75px;max-height:200px;">
+                </a>
+            </div>
+            <div class="col-11">
+                @Html.Partial("/Views/Items/CommentItem.cshtml", cmt)
+            </div>
+        }
+    </div>
+    ><a href="@comment_url">所有短评 (@ViewBag.CommentsNum 条)</a>
+</div>

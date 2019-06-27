@@ -1,0 +1,32 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>ASP.NET 图书评分系统</h1>
+    <p class="lead mb-0">该系统基本功能：管理图书信息，管理用户信息，管理评论信息；</p>
+    <p class="lead">实现用户登录评价图书，提供图书评论及评分的展示；</p>
+    <p><a href="/Home/ClearData" class="btn btn-outline-warning btn-lg">清空数据 &raquo;</a></p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>数据集 1</h2>
+        <p>
+            手动输入的数据，用于测试系统的基本功能，大约有 100 条
+        </p>
+        <p><a class="btn btn-outline-primary" href="/Home/GenData?id=1">导入数据 &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>数据集 2</h2>
+        <p>
+            爬取的数据，测试系统查询速度等功能，大约 10 万条，作为过渡数据，逐步增加数据量
+        </p>
+        <p><a class="btn btn-outline-primary" href="/Home/GenData?id=2">导入数据 &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>数据集 3</h2>
+        <p>最终的测试数据，约有 100 万条，用于最总测试及提供优化参考</p>
+        <p><a class="btn btn-outline-primary" href="/Home/GenData?id=3">导入数据 &raquo;</a></p>
+    </div>
+</div>

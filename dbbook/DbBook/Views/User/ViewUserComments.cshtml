@@ -1,0 +1,23 @@
+﻿@using DbBook.ViewModels;
+@model List<CommentItem>
+
+<div class="container clearfix">
+    <h2 class="font-weight-bold"> @ViewBag.UserName 的短评</h2>
+    <span class="font-weight-light"> 全部共 @ViewBag.CommentsNum 条 </span>
+    <div class="row">
+        @foreach (var cmt in Model)
+        {
+            string book_cover = "/Images/cover/book_" + cmt.isbn + ".jpg";
+            string book_url = "/User/ViewBook?isbn=" + cmt.isbn;
+
+            <div class="col-1 my-2">
+                <a href="@book_url" title="查看详情">
+                    <img src="@book_cover" title="查看详情" class="rounded" alt="@cmt.isbn" style="width:75px;max-height:200px;">
+                </a>
+            </div>
+            <div class="col-11">
+                @Html.Partial("/Views/Items/CommentItem.cshtml", cmt)
+            </div>
+        }
+    </div>
+</div>

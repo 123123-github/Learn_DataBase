@@ -1,0 +1,68 @@
+﻿@model IEnumerable<DbBook.Models.Comment>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@Html.Partial("/Views/Items/SearchBar.cshtml", (SearchBar)ViewBag.SearchBar)
+
+<br>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.cdate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.score)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.content)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Book.title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.User.account)
+        </th>
+        <th>
+            @Html.ActionLink("Create New", "Create")
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.cdate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.score)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.content)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Book.title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.account)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.cid }) |
+                @Html.ActionLink("Details", "Details", new { id = item.cid }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.cid })
+            </td>
+        </tr>
+    }
+
+</table>
+
+@{
+    string tag = Request.Params.Get("tag");
+    string content = Request.Params.Get("content");
+    string sort = Request.Params.Get("sort");
+}
+<div>
+    @Html.PageLinks((PagingInfo)ViewBag.PagingInfo, x => Url.Action("Index", "Comments",
+        new { tag = tag, content = content, sort = sort, page = x }))
+</div>
